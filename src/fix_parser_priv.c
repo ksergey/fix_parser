@@ -354,7 +354,7 @@ FIXErrCode fix_parser_parse_group(
       {
          int32_t numGroups = 0;
          int32_t cnt;
-         FIXErrCode err = fix_utils_atoi32(dbegin, *stop - dbegin, delimiter, &numGroups, &cnt);
+         FIXErrCode err = fix_utils_atoi32(dbegin, *stop - dbegin, 0, &numGroups, &cnt);
          if (err < 0)
          {
             *error = fix_error_create(err, "Unable to get group tag %d value.", tag);
