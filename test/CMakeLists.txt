@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0)
 
 project(test)
+
+include(ExternalProject)
 
 ExternalProject_Add(
     googletest
@@ -23,9 +25,4 @@ link_directories(${BINARY_DIR})
 aux_source_directory(. TEST_SOURCES)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCES})
-
-if (WIN32)
-   target_link_libraries(${PROJECT_NAME} gtest fix_parser_s libxml2)
-else(WIN32)
-   target_link_libraries(${PROJECT_NAME} gtest fix_parser_s pthread xml2 rt)
-endif(WIN32)
+target_link_libraries(${PROJECT_NAME} gtest fix_parser_s)
