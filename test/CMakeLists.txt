@@ -26,3 +26,6 @@ aux_source_directory(. TEST_SOURCES)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCES})
 target_link_libraries(${PROJECT_NAME} gtest fix_parser_s)
+
+file(COPY test_data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ../fix_descr DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
