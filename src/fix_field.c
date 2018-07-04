@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 static FIXField* fix_field_free(FIXMsg* msg, FIXField* field);
 static void fix_group_free(FIXMsg* msg, FIXGroup* group);
@@ -123,6 +124,7 @@ FIXGroup* fix_group_add(FIXMsg* msg, FIXGroup* grp, FIXFieldDescr const* descr, 
    {
       uint32_t const idx = descr->type->tag % GROUP_SIZE;
       field = (FIXField*)fix_msg_alloc(msg, sizeof(FIXField), error);
+      assert(field);
       field->descr = descr;
       field->next = group->fields[idx];
       group->fields[idx] = field;
@@ -144,6 +146,7 @@ FIXGroup* fix_group_add(FIXMsg* msg, FIXGroup* grp, FIXFieldDescr const* descr, 
    {
       FIXGroups* grps = (FIXGroups*)field->data;
       FIXGroups* new_grps = (FIXGroups*)fix_msg_realloc(msg, field->data, sizeof(FIXGroups) + sizeof(FIXGroup*) * (field->size + 1), error);
+      assert(new_grps);
       memcpy(new_grps->group, grps->group, sizeof(FIXGroup*) * (field->size));
       new_grps->group[field->size] = fix_msg_alloc_group(msg, error);
       if (!new_grps->group[field->size])

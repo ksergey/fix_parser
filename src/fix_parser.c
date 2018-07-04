@@ -14,6 +14,7 @@
 #include "fix_error_priv.h"
 #include "fix_field_tag.h"
 
+#include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -45,6 +46,7 @@ FIX_PARSER_API FIXParser* fix_parser_create(char const* protFile, FIXParserAttrs
    for(uint32_t i = 0; i < parser->attrs.numPages; ++i)
    {
       FIXPage* page = (FIXPage*)calloc(1, sizeof(FIXPage) + parser->attrs.pageSize - 1);
+      assert(page);
       page->size = parser->attrs.pageSize;
       page->next = parser->page;
       parser->page = page;
@@ -52,6 +54,7 @@ FIX_PARSER_API FIXParser* fix_parser_create(char const* protFile, FIXParserAttrs
    for(uint32_t i = 0; i < parser->attrs.numGroups; ++i)
    {
       FIXGroup* group = (FIXGroup*)calloc(1, sizeof(FIXGroup));
+      assert(group);
       group->next = parser->group;
       parser->group = group;
    }
@@ -282,7 +285,7 @@ FIX_PARSER_API FIXMsg* fix_parser_str_to_msg(FIXParser* parser, char const* data
    {
       goto error;
    }
-   FIXFieldDescr const* fdescr  = fix_protocol_get_field_descr(msg->descr, FIXFieldTag_CheckSum);
+   FIXFieldDescr const* fdescr = fix_protocol_get_field_descr(msg->descr, FIXFieldTag_CheckSum);
    if (!fdescr)
    {
       *error = fix_error_create(FIX_ERROR_UNKNOWN_FIELD, "Field with tag %d not found in message '%s' description.",

@@ -10,6 +10,7 @@
 #include "fix_error_priv.h"
 
 #include <string.h>
+#include <assert.h>
 
 /*------------------------------------------------------------------------------------------------------------------------*/
 FIXPage* fix_parser_alloc_page(FIXParser* parser, uint32_t pageSize, FIXError** error)
@@ -332,6 +333,8 @@ FIXErrCode fix_parser_parse_group(
             }
          }
       }
+
+      assert(fdescr);
       if (FIX_FAILED == fix_parser_parse_value(msg, group, fdescr, dbegin, bodyEnd - dbegin + 1, delimiter, stop, error))
       {
          return FIX_FAILED;
@@ -360,6 +363,8 @@ FIXErrCode fix_parser_parse_group(
             *error = fix_error_create(err, "Unable to get group tag %d value.", tag);
             return FIX_FAILED;
          }
+         assert(group != NULL);
+
          err = fix_parser_parse_group(parser, msg, group, fdescr, numGroups, *stop, bodyEnd, delimiter, stop, error);
          if (err == FIX_FAILED)
          {
