@@ -41,6 +41,7 @@ FIXPage* fix_parser_alloc_page(FIXParser* parser, uint32_t pageSize, FIXError** 
       parser->page = page->next;
       page->next = NULL; // detach from pool of free pages
    }
+   assert( page->size >= pageSize );
    ++parser->used_pages;
    return page;
 }
@@ -357,6 +358,7 @@ FIXErrCode fix_parser_parse_group(
       {
          int32_t numGroups = 0;
          int32_t cnt;
+         assert( *(*stop) == delimiter );
          FIXErrCode err = fix_utils_atoi32(dbegin, *stop - dbegin, 0, &numGroups, &cnt);
          if (err < 0)
          {

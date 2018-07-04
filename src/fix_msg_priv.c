@@ -14,12 +14,13 @@
 void* fix_msg_alloc(FIXMsg* msg, uint32_t size, FIXError** error)
 {
    FIXPage* curr_page = msg->curr_page;
-   if (sizeof(uint32_t) + curr_page->size - curr_page->offset >= size)
+
+   if (curr_page->offset + sizeof(uint32_t) + size <= curr_page->size)
    {
       uint32_t old_offset = curr_page->offset;
-      *(uint32_t*)(&curr_page->data + curr_page->offset) = size;
+      *(uint32_t*)(curr_page->data + curr_page->offset) = size;
       curr_page->offset += (size + sizeof(uint32_t));
-      return &curr_page->data + old_offset + sizeof(uint32_t);
+      return curr_page->data + old_offset + sizeof(uint32_t);
    }
    else
    {
