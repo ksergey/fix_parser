@@ -19,10 +19,10 @@ extern "C"
 {
 #endif
 
-#define FIELD_VALUE_CNT 20
-#define FIELD_TYPE_CNT 1000
-#define FIELD_DESCR_CNT 100
-#define MSG_CNT   100
+#define FIELD_VALUE_CNT 32
+#define FIELD_TYPE_CNT 1024
+#define FIELD_DESCR_CNT 128
+#define MSG_CNT 128
 #define FIELD_FLAG_REQUIRED 0x01
 
 /**

@@ -41,7 +41,7 @@ void create_msg(FIXParser* parser)
 
    GET_TIMESTAMP(start);
 
-   int32_t const count = 100000;
+   int32_t const count = 1000000;
 
    for(int32_t i = 0; i < count; ++i)
    {
@@ -93,7 +93,7 @@ void msg_to_str(FIXParser* parser)
 
    GET_TIMESTAMP(start);
 
-   int32_t const count = 100000;
+   int32_t const count = 1000000;
 
    for(int32_t i = 0; i < count; ++i)
    {
@@ -155,7 +155,7 @@ void str_to_msg(FIXParser* parser)
 
    FIXMsg* msg = NULL;
 
-   int32_t const count = 100000;
+   int32_t const count = 1000000;
 
    for(int32_t i = 0; i < count; ++i)
    {
