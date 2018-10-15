@@ -459,7 +459,7 @@ FIX_PARSER_API FIXErrCode fix_msg_del_field(FIXMsg* msg, FIXGroup* grp, FIXTagNu
 FIX_PARSER_API FIXErrCode fix_msg_to_str(FIXMsg* msg, char delimiter, char* buff, uint32_t buffLen, uint32_t* reqBuffLen,
       FIXError** error)
 {
-   if(!msg || !msg || !reqBuffLen)
+   if(!msg || !reqBuffLen)
    {
       return FIX_FAILED;
    }

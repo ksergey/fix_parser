@@ -13,16 +13,11 @@
 
 int main(int argc, char* argv[])
 {
-    FIXParserAttrs attrs;
-    attrs.pageSize = 4096 * 4;
-    attrs.maxPages = 0;
-    attrs.numPages = 0;
-    attrs.maxPageSize = 0;
-    attrs.numGroups = 0;
-    attrs.maxGroups = 0;
+    (void) argc;
+    (void) argv;
+
     FIXError* error = NULL;
 
-    //FIXParser* parser = fix_parser_create("test_data/fix3.xml", &attrs, PARSER_FLAG_CHECK_ALL, &error);
     FIXParser* parser = fix_parser_create("test_data/fix3.xml", NULL, PARSER_FLAG_CHECK_ALL, &error);
     assert( parser != NULL );
 
@@ -31,7 +26,7 @@ int main(int argc, char* argv[])
     FIXMsg* msg = fix_parser_str_to_msg(parser, buff, strlen(buff), FIX_SOH, &stop, &error);
     if (!msg) {
         printf("error %d %s\n", error->code, fix_error_get_text(error));
-        printf("%x %x %d\n", buff, stop, (int)(stop - buff));
+        //printf("%x %x %d\n", buff, stop, (int)(stop - buff));
     } else {
         uint32_t reqBuffLen = 0;
         char data[1024 * 1024];
