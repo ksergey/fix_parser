@@ -41,7 +41,7 @@ FIXPage* fix_parser_alloc_page(FIXParser* parser, uint32_t pageSize, FIXError** 
       parser->page = page->next;
       page->next = NULL; // detach from pool of free pages
    }
-   assert( page->size >= pageSize );
+   //assert( page->size >= pageSize );
    ++parser->used_pages;
    return page;
 }
