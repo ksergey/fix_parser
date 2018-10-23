@@ -24,7 +24,7 @@ void* fix_msg_alloc(FIXMsg* msg, uint32_t size, FIXError** error)
    }
    else
    {
-      FIXPage* new_page = fix_parser_alloc_page(msg->parser, size, error);
+      FIXPage* new_page = fix_parser_alloc_page(msg->parser, size + sizeof(uint32_t), error);
       if (!new_page)
       {
          return NULL;
