@@ -26,10 +26,10 @@ set(TEST_SOURCES fix_field_tests.cc fix_msg_tests.cc fix_parser_priv_tests.cc
     fix_parser_tests.cc fix_protocol_tests.cc fix_utils_tests.cc main.cc)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCES})
-target_link_libraries(${PROJECT_NAME} gtest fix_parser_s)
+target_link_libraries(${PROJECT_NAME} gtest fix_parser)
 
 add_executable(fix_parser_issue1_tests fix_parser_issue1_tests.cc)
-target_link_libraries(fix_parser_issue1_tests fix_parser_s)
+target_link_libraries(fix_parser_issue1_tests fix_parser)
 target_compile_options(fix_parser_issue1_tests PRIVATE -Wall -Wextra)
 
 file(COPY test_data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

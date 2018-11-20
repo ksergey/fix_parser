@@ -5,8 +5,4 @@ project(perf_test)
 aux_source_directory(. PERF_TEST_SOURCES)
 
 add_executable(${PROJECT_NAME} ${PERF_TEST_SOURCES})
-target_link_libraries(${PROJECT_NAME} fix_parser_s)
-
-if (WIN32)
-   set_source_files_properties(${PERF_TEST_SOURCES} PROPERTIES LANGUAGE CXX)
-endif()
+target_link_libraries(${PROJECT_NAME} fix_parser)
