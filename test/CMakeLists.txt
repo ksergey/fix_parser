@@ -4,6 +4,8 @@ project(test)
 
 include(ExternalProject)
 
+find_package(Threads REQUIRED)
+
 ExternalProject_Add(
     googletest
     GIT_REPOSITORY https://github.com/dmitryme/gtest.git
@@ -26,7 +28,7 @@ set(TEST_SOURCES fix_field_tests.cc fix_msg_tests.cc fix_parser_priv_tests.cc
     fix_parser_tests.cc fix_protocol_tests.cc fix_utils_tests.cc main.cc)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCES})
-target_link_libraries(${PROJECT_NAME} gtest fix_parser)
+target_link_libraries(${PROJECT_NAME} gtest fix_parser ${CMAKE_THREAD_LIBS_INIT})
 
 add_executable(fix_parser_issue1_tests fix_parser_issue1_tests.cc)
 target_link_libraries(fix_parser_issue1_tests fix_parser)

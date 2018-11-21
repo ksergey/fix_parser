@@ -7,7 +7,10 @@
 #include "fix_utils.h"
 #include "fix_types.h"
 
+#include <libgen.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define DOUBLE_MAX_DIGITS 15
 
@@ -281,4 +284,30 @@ FIXErrCode fix_utils_atod(char const* buff, uint32_t buffLen, char stopChar, dou
    *val += exp;
    *val *= sign;
    return FIX_SUCCESS;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+FIXErrCode fix_utils_make_path(char const* protocolFile, char const* transpFile, char* path, uint32_t buffLen)
+{
+   FIXErrCode ret = FIX_SUCCESS;
+   char* transpFileDup = strdup(transpFile);
+   char* protocolFileDup = strdup(protocolFile);
+   if (!strcmp(basename(transpFileDup), transpFile) &&
+       strcmp(basename(protocolFileDup), protocolFile)) // make sure no dir(even ./) set for transpFile and protocolFile has a dir
+   {
+      if (snprintf(path, buffLen, "%s/%s", dirname(protocolFileDup), basename(transpFileDup)) >= buffLen)
+      {
+         ret = FIX_FAILED;
+      }
+   }
+   else
+   {
+      if (snprintf(path, buffLen, "%s", transpFile) >= buffLen)
+      {
+         ret = FIX_FAILED;
+      }
+   }
+   free(transpFileDup);
+   free(protocolFileDup);
+   return ret;
 }
