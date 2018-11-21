@@ -31,17 +31,11 @@ ExternalProject_Add(LibXml2-build
         --without-zlib
 )
 
-
 include(CheckFunctionExists)
 
 check_function_exists(pow LIBM_IS_OPT)
 if(NOT LIBM_IS_OPT)
     find_library(libm_opt NAMES m)
-    list(APPEND CMAKE_REQUIRED_LIBRARIES ${libm_opt})
-    check_function_exists(pow RESULT)
-    if(NOT RESULT)
-        message(FATAL_ERROR "libm not found")
-    endif()
 endif()
 
 add_library(LibXml2-static INTERFACE)
