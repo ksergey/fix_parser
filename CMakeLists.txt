@@ -47,7 +47,7 @@ endif()
 add_library(LibXml2-static INTERFACE)
 add_dependencies(LibXml2-static LibXml2-build)
 target_link_libraries(LibXml2-static INTERFACE ${EXT_INSTALL_PREFIX}/lib/libxml2.a ${libm_opt})
-target_include_directories(LibXml2-static INTERFACE ${EXT_INSTALL_PREFIX}/include/libxml2)
+target_include_directories(LibXml2-static INTERFACE SYSTEM ${EXT_INSTALL_PREFIX}/include/libxml2)
 
 set(target fix_parser)
 file(GLOB_RECURSE sources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
