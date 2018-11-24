@@ -22,7 +22,7 @@ set(EXT_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/ext")
 ExternalProject_Add(LibXml2-build
     URL "ftp://xmlsoft.org/libxml2/libxml2-2.8.0.tar.gz"
     BUILD_IN_SOURCE 1
-    CONFIGURE_COMMAND ./configure --prefix=${EXT_INSTALL_PREFIX} --disable-shared --enable-static
+    CONFIGURE_COMMAND CFLAGS=-w ./configure --prefix=${EXT_INSTALL_PREFIX} --disable-shared --enable-static -q
         --without-debug
         --without-iconv
         --without-lzma
